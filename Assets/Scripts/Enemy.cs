@@ -1,4 +1,5 @@
-
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,9 +8,9 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
+    public float offset;
 
     public LayerMask whatIsGround, whatIsPlayer;
-
     public float health;
 
     //Patroling
@@ -21,6 +22,10 @@ public class Enemy : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
+    public float projectile_speedX = 30f;
+    public float projectile_speedY = 5f;
+
+    public Transform Shooter;
 
     //States
     public float sightRange, attackRange;
@@ -28,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     public PlayerHealth playerHealth;
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -53,8 +58,8 @@ public class Enemy : MonoBehaviour
     }
     private void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
@@ -71,19 +76,28 @@ public class Enemy : MonoBehaviour
     { 
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
+        transform.LookAt(aim);
+        transform.rotation *= Quaternion.Euler(0,offset,0);
 
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            Rigidbody rb = Instantiate(projectile, Shooter.position, Quaternion.identity).GetComponent<Rigidbody>();
+
+            rb.AddForce(transform.forward * projectile_speedX + transform.right*projectile_speedY, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
             playerHealth.TakeDamage(10);
         }
     }
+
+    private void destro_bullet()
+    {
+        
+    }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
