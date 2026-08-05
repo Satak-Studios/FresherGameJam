@@ -31,8 +31,6 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
-    public PlayerHealth playerHealth;
-
     private void FixedUpdate()
     {
         //Check for sight and attack range
@@ -88,14 +86,7 @@ public class Enemy : MonoBehaviour
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-            playerHealth.TakeDamage(10);
         }
-    }
-
-    private void destro_bullet()
-    {
-        
     }
 
     private void ResetAttack()
