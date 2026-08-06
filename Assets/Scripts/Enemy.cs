@@ -11,19 +11,24 @@ public class Enemy : MonoBehaviour
     public float offset;
 
     public LayerMask whatIsGround, whatIsPlayer;
-    public float health;
+    public float health_max = 30f;
+    public float respawn_prob = 0.2f;
+    public ParticleSystem respawn_particle;
 
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
+
     //Attacking
     public float timeBetweenAttacks;
+    public float attack_offsets = 1f;
     bool alreadyAttacked;
     public GameObject projectile;
-    public float projectile_speedX = 30f;
-    public float projectile_speedY = 5f;
+    public float projectile_speedX;
+    public float projectile_speedY;
+    public float thickify_probability;
 
     public Transform Shooter;
 
@@ -31,6 +36,13 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    private float health;
+
+
+    void Start()
+    {
+        health = health_max;
+    }
     private void FixedUpdate()
     {
         //Check for sight and attack range
@@ -80,12 +92,17 @@ public class Enemy : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, Shooter.position, Quaternion.identity).GetComponent<Rigidbody>();
+            GameObject bullet = Instantiate(projectile, Shooter.position,transform.rotation);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if(UnityEngine.Random.Range(0f,1f) < thickify_probability)
+            {
+                bullet.transform.localScale += new Vector3(20f,0F,0f);
+            }
 
             rb.AddForce(transform.forward * projectile_speedX + transform.right*projectile_speedY, ForceMode.Impulse);
 
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke(nameof(ResetAttack), timeBetweenAttacks + UnityEngine.Random.Range(0,attack_offsets));
         }
     }
 
@@ -93,16 +110,26 @@ public class Enemy : MonoBehaviour
     {
         alreadyAttacked = false;
     }
-
     public void TakeDamage(int damage)
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (health <= 0) {
+            Invoke(nameof(DestroyEnemy), 0.5f);
+        }
     }
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        if(UnityEngine.Random.Range(0f,1f) > respawn_prob)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            health = health_max/2;
+            health_max = health;
+            respawn_particle.Play();
+        }
     }
 
     private void OnDrawGizmosSelected()
