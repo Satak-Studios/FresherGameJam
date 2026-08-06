@@ -17,6 +17,7 @@ public class mouseMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = FindAnyObjectByType<PlayerHealth>().gameObject.transform;
         MouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
         MouseY = Input.GetAxis("Mouse Y")* MouseSensitivity * Time.deltaTime;
 

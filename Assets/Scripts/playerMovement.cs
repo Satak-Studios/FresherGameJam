@@ -19,8 +19,6 @@ public class playerMovement : MonoBehaviour
 
     public Transform GroundCheck;
     public LayerMask groundmask;
-    public Camera playerCam;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void undo_inversion()
     {
@@ -30,7 +28,7 @@ public class playerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(UnityEngine.Random.Range(0f,100f) < inversion_probability && !isInverted)
+        if(Random.Range(0f,100f) < inversion_probability && !isInverted)
         {
             isInverted = true;
             text_inverted.text = "INVERTED CONTROLS ON!";
