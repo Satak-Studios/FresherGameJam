@@ -4,6 +4,7 @@ public class Gun : MonoBehaviour
 {
     public int damage = 10;
     public float range = 10f;
+    public AudioClip gun_sound;
 
     public Camera fpsCamera;
     public ParticleSystem ps;
@@ -20,6 +21,7 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         ps.Play();
+        SFXManager.instance.PlaySFXClip(gun_sound,transform,1f);
         RaycastHit hit;
         if(Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward,out hit))
         {
