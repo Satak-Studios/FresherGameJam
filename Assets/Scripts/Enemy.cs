@@ -1,7 +1,6 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class Enemy : MonoBehaviour
     public float offset;
 
     public LayerMask whatIsGround, whatIsPlayer;
-    public float health;
 
     //Patroling
     public Vector3 walkPoint;
@@ -31,6 +29,24 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    //Health Bar => same as player script
+    public float _health;
+    public Slider healthBar;
+    public Gradient healthGrad;
+    public Image fill;
+    public Text healthTxt;
+
+    public Camera playerCam;
+    bool isAttacking = false;
+
+    private void Start()
+    {
+        healthTxt.text = _health.ToString() + "%";
+        healthBar.maxValue = _health;
+        healthBar.value = _health;
+        fill.color = healthGrad.Evaluate(1f);
+    }
+
     private void FixedUpdate()
     {
         //Check for sight and attack range
@@ -40,6 +56,26 @@ public class Enemy : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+    }
+
+    private void Update()
+    {
+        /*if (isAttacking)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit))
+            {
+                PlayerHealth _player = hit.transform.GetComponent<PlayerHealth>();
+                if (_player != null)
+                {
+                    _player.TakeDamage(20);
+                }
+            }
+        }*/
+
+        healthTxt.text = _health.ToString() + "%";
+        healthBar.value = _health;
+        fill.color = healthGrad.Evaluate(healthBar.normalizedValue);
     }
 
     private void Patroling()
@@ -71,7 +107,8 @@ public class Enemy : MonoBehaviour
     }
 
     private void AttackPlayer()
-    { 
+    {
+        isAttacking = true;
         agent.SetDestination(transform.position);
 
         Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
@@ -86,7 +123,8 @@ public class Enemy : MonoBehaviour
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
+            isAttacking = false;
+        } 
     }
 
     private void ResetAttack()
@@ -96,9 +134,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        _health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (_health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        healthTxt.text = _health.ToString() + "%";
+        healthBar.value = _health;
+        fill.color = healthGrad.Evaluate(healthBar.normalizedValue);
     }
     private void DestroyEnemy()
     {

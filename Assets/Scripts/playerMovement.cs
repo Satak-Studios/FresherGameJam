@@ -14,6 +14,8 @@ public class playerMovement : MonoBehaviour
 
     public Transform GroundCheck;
     public LayerMask groundmask;
+    public Camera playerCam;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,7 +34,7 @@ public class playerMovement : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y += jump_speed;
         }
