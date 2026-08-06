@@ -7003,7 +7003,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   health_max: 30
-  respawn_prob: 1
+  respawn_prob: 0.5
   respawn_particle: {fileID: 676840537341039686}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
@@ -7012,7 +7012,7 @@ MonoBehaviour:
   projectile: {fileID: 3302379682200405297, guid: 23ee4c26fd72bb64ca89ec37626abf1b, type: 3}
   projectile_speedX: 30
   projectile_speedY: 0
-  thickify_probability: 0
+  thickify_probability: 0.2
   Shooter: {fileID: 7249721160334295419}
   sightRange: 40
   attackRange: 20

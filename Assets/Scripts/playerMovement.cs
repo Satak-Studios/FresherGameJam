@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class playerMovement : MonoBehaviour
 {
     public CharacterController controller;
@@ -15,6 +15,7 @@ public class playerMovement : MonoBehaviour
     float x,z;
     bool isGrounded;
     bool isInverted;
+    [SerializeField] TextMeshProUGUI text_inverted;
 
     public Transform GroundCheck;
     public LayerMask groundmask;
@@ -22,16 +23,21 @@ public class playerMovement : MonoBehaviour
     void undo_inversion()
     {
         isInverted = false;
+        text_inverted.text = "";
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(UnityEngine.Random.Range(0f,100f) < inversion_probability && !isInverted)
         {
             isInverted = true;
+            text_inverted.text = "INVERTED CONTROLS ON!";
             Invoke(nameof(undo_inversion),inversion_duration);
-        }        
+        }    
+    }
+    // Update is called once per frame
+    void Update()
+    {    
         isGrounded = Physics.CheckSphere(GroundCheck.position,ground_distance,groundmask);
         if(isGrounded && velocity.y < 0)
         {

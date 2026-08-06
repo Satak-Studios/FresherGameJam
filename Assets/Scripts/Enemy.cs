@@ -86,8 +86,8 @@ public class Enemy : MonoBehaviour
     { 
         agent.SetDestination(transform.position);
 
-        Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
-        transform.LookAt(aim);
+        //Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
+        transform.LookAt(player.position);
         transform.rotation *= Quaternion.Euler(0,offset,0);
 
         if (!alreadyAttacked)

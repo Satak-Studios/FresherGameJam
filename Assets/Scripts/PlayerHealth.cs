@@ -1,14 +1,23 @@
+using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float _health;
+    public int health;
+    public health_bar playerHP;
+    [SerializeField] TextMeshProUGUI healthText;
+
+    void Start()
+    {
+        playerHP.setMaxHealth(health);
+        healthText.text = health.ToString();
+    }
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-
-        if (_health <= 0) Debug.Log("Player Died, Game Over");
-        Debug.Log("Player took damage and the current health is " + _health);
+        health -= damage;
+        playerHP.SetHealth(health);
+        healthText.text = health.ToString();
     }
 }
