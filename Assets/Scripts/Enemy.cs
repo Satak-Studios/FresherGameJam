@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     public float thickify_probability;
 
     public Transform Shooter;
-
+    public AudioClip hurt_sound;
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        SFXManager.instance.PlaySFXClip(hurt_sound,transform,1f);
         if (health <= 0) {
             Invoke(nameof(DestroyEnemy), 0.5f);
         }

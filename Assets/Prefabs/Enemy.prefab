@@ -7014,6 +7014,7 @@ MonoBehaviour:
   projectile_speedY: 0
   thickify_probability: 0.2
   Shooter: {fileID: 7249721160334295419}
+  hurt_sound: {fileID: 8300000, guid: 5b68e3dda909bea45b7b87b50869b9b4, type: 3}
   sightRange: 40
   attackRange: 20
   playerInSightRange: 0
