@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     private float health;
     public Slider healthBar;
+    private bool hasRespawned = false;
 
     void Start()
     {
@@ -124,15 +125,15 @@ public class Enemy : MonoBehaviour
     }
     private void DestroyEnemy()
     {
-        if(UnityEngine.Random.Range(0f,1f) > respawn_prob)
+        if(UnityEngine.Random.Range(0f,1f) > respawn_prob || hasRespawned)
         {
             Destroy(gameObject);
         }
-        else
-        {
+        else{
             health = health_max/2;
             health_max = health;
             respawn_particle.Play();
+            hasRespawned = true;
         }
     }
 
