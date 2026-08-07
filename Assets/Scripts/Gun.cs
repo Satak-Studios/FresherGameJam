@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
             if (barrel != null)
             {
                 barrel.TakeDamage(barrelDamage);
-                Debug.Log("Barrel taking damage!");
+                //Debug.Log("Barrel taking damage!");
             }
         }
     }
