@@ -28,7 +28,7 @@ public class playerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(UnityEngine.Random.Range(0f,100f) < inversion_probability && !isInverted)
+        if(Random.Range(0f,100f) < inversion_probability && !isInverted)
         {
             isInverted = true;
             text_inverted.text = "INVERTED CONTROLS ON!";

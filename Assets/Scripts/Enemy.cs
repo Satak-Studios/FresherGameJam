@@ -2,6 +2,7 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -37,11 +38,12 @@ public class Enemy : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     private float health;
-
+    public Slider healthBar;
 
     void Start()
     {
         health = health_max;
+        healthBar.maxValue = health_max;
     }
     private void FixedUpdate()
     {
@@ -52,6 +54,8 @@ public class Enemy : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        healthBar.value = health;
     }
 
     private void Patroling()
