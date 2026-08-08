@@ -16,5 +16,4 @@ public class health_bar : MonoBehaviour
         fill.maxValue = maxHealth;
         fill.value = maxHealth;
     }
-    // Update is called once per frame
 }
