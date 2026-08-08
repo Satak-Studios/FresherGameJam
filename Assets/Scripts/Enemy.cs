@@ -57,11 +57,6 @@ public class Enemy : MonoBehaviour
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
         healthBar.value = health;
-
-        if (health <= 0)
-        {
-            Invoke(nameof(DestroyEnemy), 0.5f);
-        }
     }
 
     private void Patroling()
@@ -125,13 +120,16 @@ public class Enemy : MonoBehaviour
         health -= damage;
         SFXManager.instance.PlaySFXClip(hurt_sound,transform,1f);
         if (health <= 0) {
+            Debug.Log("how much trigger");
             Invoke(nameof(DestroyEnemy), 0.5f);
         }
     }
     private void DestroyEnemy()
     {
-        if(UnityEngine.Random.Range(0f,1f) > respawn_prob || hasRespawned)
+        Debug.Log(hasRespawned);
+        if((UnityEngine.Random.Range(0f,1f) > respawn_prob) || hasRespawned)
         {
+            Debug.Log("we fucked");
             Destroy(gameObject);
         }
         else{
