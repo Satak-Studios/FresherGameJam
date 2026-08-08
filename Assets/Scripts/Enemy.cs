@@ -29,7 +29,9 @@ public class Enemy : MonoBehaviour
     public GameObject projectile;
     public float projectile_speedX;
     public float projectile_speedY;
+
     public float thickify_probability;
+    public float thicknessFactor;
 
     public Transform Shooter;
     public AudioClip hurt_sound;
@@ -101,7 +103,7 @@ public class Enemy : MonoBehaviour
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if(UnityEngine.Random.Range(0f,1f) < thickify_probability)
             {
-                bullet.transform.localScale += new Vector3(20f,0F,0f);
+                bullet.transform.localScale += new Vector3(thicknessFactor,0F,0f);
             }
 
             rb.AddForce(transform.forward * projectile_speedX + transform.right*projectile_speedY, ForceMode.Impulse);
