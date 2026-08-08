@@ -8,10 +8,20 @@ public class PlayerHealth : MonoBehaviour
     public health_bar playerHP;
     [SerializeField] TextMeshProUGUI healthText;
 
+    public GameManager gameManager;
+
     void Start()
     {
         playerHP.setMaxHealth(health);
         healthText.text = health.ToString();
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            gameManager.GameOver();
+        }
     }
 
     public void TakeDamage(int damage)

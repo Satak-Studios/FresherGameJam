@@ -57,6 +57,11 @@ public class Enemy : MonoBehaviour
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
         healthBar.value = health;
+
+        if (health <= 0)
+        {
+            Invoke(nameof(DestroyEnemy), 0.5f);
+        }
     }
 
     private void Patroling()
@@ -135,6 +140,11 @@ public class Enemy : MonoBehaviour
             respawn_particle.Play();
             hasRespawned = true;
         }
+    }
+
+    public void Heal(float healAmount)
+    {
+        health += healAmount;
     }
 
     private void OnDrawGizmosSelected()
