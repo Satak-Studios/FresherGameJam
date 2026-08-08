@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnCollisionEnter(Collision collision)
     {
         PlayerHealth ph = collision.gameObject.GetComponent<PlayerHealth>();
@@ -12,6 +11,8 @@ public class bullet : MonoBehaviour
         }
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         rb.useGravity = true;
-        Destroy(gameObject,3);
+        //Destroy(gameObject,3);
+        //The Time to be quicker
+        Destroy(gameObject,1);
     }
 }
