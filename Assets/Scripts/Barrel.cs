@@ -51,15 +51,16 @@ public class Barrel : MonoBehaviour
         {
             Blast();
         }
-        Debug.Log("The barrel health is " + _health);
+        //Debug.Log("The barrel health is " + _health);
     }
 
     void Blast()
     {
 	    _blast.Play();
+        FindAnyObjectByType<ScreenShake>().StartShake(0.6f, 0.5f);
         CauseDamage();
 	    Destroy(gameObject, 0.97f);
-        Debug.Log("Blast!");
+        //Debug.Log("Blast!");
     }
 
     void InvertBlast()
@@ -69,7 +70,6 @@ public class Barrel : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            // Check if the object has a damage receiver script
             if (hitCollider.GetComponent<PlayerHealth>() != null)
             {
                 hitCollider.GetComponent<PlayerHealth>().TakeDamage(damageAmount);

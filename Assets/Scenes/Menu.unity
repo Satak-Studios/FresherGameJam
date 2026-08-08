@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Options
+  m_Text: Tutorial
 --- !u!222 &11695572
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1184,8 +1184,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823404377}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Options
-        m_Mode: 1
+        m_MethodName: StopCoroutine
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1345,8 +1345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -35.1952, y: 28.200012}
-  m_SizeDelta: {x: 43.4341, y: 32.1484}
+  m_AnchoredPosition: {x: -55.703506, y: 28.200012}
+  m_SizeDelta: {x: 84.4507, y: 32.1484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1420947622
 MonoBehaviour:
@@ -1498,6 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b999117fe3813a84ea898c746e48493d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  versionTxt: {fileID: 1420947622}
 --- !u!4 &1823404378
 Transform:
   m_ObjectHideFlags: 0

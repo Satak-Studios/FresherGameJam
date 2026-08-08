@@ -23,6 +23,7 @@ public class ScreenShake : MonoBehaviour
         }
 
         //cameraTransform = Camera.main.transform;
+        shakeDuration = 0;
         cameraTransform = gameObject.transform;
         initialPosition = cameraTransform.localPosition;
     }
