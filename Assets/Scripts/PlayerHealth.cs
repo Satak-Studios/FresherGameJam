@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
 
     public GameManager gameManager;
+    public bool isTutu = false;
+    public GameObject tutuScreen = null;
 
     void Start()
     {
@@ -20,7 +23,14 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            gameManager.GameOver();
+            if (isTutu)
+            {
+                tutuScreen.SetActive(true);
+            }
+            else
+            {
+                gameManager.GameOver();
+            }
         }
         else
         {
@@ -39,5 +49,15 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int amt)
     {
         health = health + amt;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour
+public class MiniBoss : MonoBehaviour
 {
     public NavMeshAgent agent;
 
@@ -34,7 +34,7 @@ public class Boss : MonoBehaviour
 
     public Transform Shooter;
     public AudioClip hurt_sound;
-    //States
+
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
@@ -101,7 +101,7 @@ public class Boss : MonoBehaviour
     {
         agent.SetDestination(transform.position);
 
-        Vector3 lookat = new Vector3(player.position.x,transform.position.y,player.position.z);
+        Vector3 lookat = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(lookat);
         transform.rotation *= Quaternion.Euler(0, offset, 0);
 
@@ -139,23 +139,24 @@ public class Boss : MonoBehaviour
     private void DestroyEnemy()
     {
         Debug.Log("hello1");
-        Meiosis();
-    }
-
-    public void Meiosis() //Yes, Biology is Fun :D
-    {
-        string[] lines = {"Haha you really thought you would win soo easy! ofcourse not,lets see you deal with 2 of me","WHATTT-"};
-        string[] speaker = {"Evil robot","YOU"};
         D.gameObject.SetActive(true);
-        D.StartDialogue(lines,speaker);
 
-        miniBoss[0].gameObject.SetActive(true);
-        miniBoss[1].gameObject.SetActive(true);
-        miniBoss[0].explosionpParticle.Stop();
-        miniBoss[1].explosionpParticle.Stop();
         healthBar.gameObject.SetActive(false);
         _boss.SetActive(false);
-        FindAnyObjectByType<GameManager>().isFirstWave = false;
+        int totalMinis = FindObjectsByType<MiniBoss>().Length;
+        Debug.Log("Total Minis : " + totalMinis);
+        if (totalMinis == 1)
+        {
+            Invoke(nameof(EndGame),5f);
+        }
+
+    }
+
+    void EndGame()
+    {
+        GameManager _gm = FindAnyObjectByType<GameManager>();
+        _gm.theEnd = true;
+
     }
 
     private void OnDrawGizmosSelected()

@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public bool isBoss = false;
 
     public GameObject secondCam;
-    public Text scoreText;
-    public int _score = 0;
+
+    public bool isFirstWave = true;
+    public bool theEnd = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,10 +33,10 @@ public class GameManager : MonoBehaviour
             gameCompleted = false;
         }
 
-        if (isBoss && FindAnyObjectByType<Boss>() == null && FindAnyObjectByType<Enemy>() == null)
+        if (isBoss && FindAnyObjectByType<MiniBoss>() == null && FindAnyObjectByType<Enemy>() == null && theEnd)
         {
             gameCompleted = true;
-            GameComplete();
+            GameOver();
         }
         else if (isBoss && FindAnyObjectByType<Boss>() != null || FindAnyObjectByType<Enemy>() != null)
         {
@@ -47,7 +48,10 @@ public class GameManager : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         secondCam.SetActive(true);
-        Destroy(FindAnyObjectByType<playerMovement>().gameObject);
+        if (FindAnyObjectByType<playerMovement>() != null)
+        {
+            Destroy(FindAnyObjectByType<playerMovement>().gameObject);
+        }
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -61,9 +65,6 @@ public class GameManager : MonoBehaviour
             Destroy(FindAnyObjectByType<playerMovement>().gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
-        //This is actual code and will be done after finalising score mechanics
-        //scoreText.text = "Score : " + _score.ToString();
-        scoreText.text = "Score : 00";
     }
 
     public void Restart()
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("level", 1);
         }
-        SceneManager.LoadScene("Level "+ (SceneManager.GetActiveScene().buildIndex+1));
+        SceneManager.LoadScene("level "+ (SceneManager.GetActiveScene().buildIndex+1));
     }
 
     public void MainMenu()

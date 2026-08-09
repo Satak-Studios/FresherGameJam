@@ -7,6 +7,6 @@ public class next_scene : MonoBehaviour
     //  the first execution of Update after the MonoBehaviour is created
     void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("level 1");
     }
 }
