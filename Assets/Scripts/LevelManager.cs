@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int index)
     {
-        SceneManager.LoadScene("Level " + index);
+        SceneManager.LoadScene("level " + index);
     }
     public void Back()
     {

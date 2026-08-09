@@ -68,9 +68,7 @@ public class GameManager : MonoBehaviour
                 Destroy(FindAnyObjectByType<playerMovement>().gameObject);
             }
             Cursor.lockState = CursorLockMode.None;
-            //This is actual code and will be done after finalising score mechanics
-            //scoreText.text = "Score : " + _score.ToString();
-            scoreText.text = "Score : 00";
+
         }
         else
         {
@@ -83,10 +81,8 @@ public class GameManager : MonoBehaviour
             }
             Cursor.lockState = CursorLockMode.None;
         }
-<<<<<<< Updated upstream
+
         Cursor.lockState = CursorLockMode.None;
-=======
->>>>>>> Stashed changes
     }
 
     public void Restart()

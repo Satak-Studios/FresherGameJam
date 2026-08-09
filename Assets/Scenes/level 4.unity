@@ -767,7 +767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &373937571
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6345,6 +6345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   gameOverScreen: {fileID: 1759903205}
   levelCompleteScreen: {fileID: 373937570}
+  gameCompleteScreen: {fileID: 0}
   isBoss: 1
   secondCam: {fileID: 998254054}
   isFirstWave: 1
@@ -6604,8 +6605,8 @@ Transform:
   m_GameObject: {fileID: 1432150928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.9066, y: 26.650002, z: -10.46}
-  m_LocalScale: {x: 7.9767485, y: 30.76, z: 1}
+  m_LocalPosition: {x: -23.2, y: 15.2, z: -9.14}
+  m_LocalScale: {x: 22.325705, y: 26.441704, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1519044204}
@@ -6656,7 +6657,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f67efe581643214ea62e132b9a1ab3f, type: 2}
+  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

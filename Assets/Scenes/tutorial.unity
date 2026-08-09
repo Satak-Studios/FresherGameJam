@@ -13148,12 +13148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   lines:
-  - uhh my head hurts where the am I?
+  - uhh my head hurts where am I?
   - Hello hero, you are here to save our people from robots!
   - Who said that?? where is that sound coming from?
   - that does not matter,all you need to know is that you have been choosen to save
     us from the robots
-  - Can i atleast get a name for you?
+  - Can I atleast get a name for you?
   - you can call me anthony.,but anyways start moving with WASD, use SPACE to Jump.
   speakers:
   - YOU
