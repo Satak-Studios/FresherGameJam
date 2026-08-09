@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
@@ -50,6 +51,8 @@ public class Boss : MonoBehaviour
     public GameObject bossHealthBar;
     public ParticleSystem explosionpParticle;
 
+    public bool willSplit;
+    public dialogue D;
     void Start()
     {
         health = health_max;
@@ -62,7 +65,7 @@ public class Boss : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (!playerInSightRange && playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
         healthBar.value = health;
@@ -93,6 +96,7 @@ public class Boss : MonoBehaviour
 
     private void ChasePlayer()
     {
+        Debug.Log("chasing");
         agent.SetDestination(player.position);
     }
 
@@ -100,8 +104,9 @@ public class Boss : MonoBehaviour
     {
         agent.SetDestination(transform.position);
 
+        Vector3 lookat = new Vector3(player.position.x,transform.position.y,player.position.z);
         //Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
-        transform.LookAt(player.position);
+        transform.LookAt(lookat);
         transform.rotation *= Quaternion.Euler(0, offset, 0);
 
         if (!alreadyAttacked)
@@ -137,11 +142,26 @@ public class Boss : MonoBehaviour
     }
     private void DestroyEnemy()
     {
-        Meiosis();
+        if(willSplit){
+            Debug.Log("hello1");
+            Meiosis();
+        }else
+        {
+            string[] lines = {"","NOO HOW TF-","get cooked robots,hell yah"};
+            string[] speaker = {"","evil robot","YOU"};
+            D.gameObject.SetActive(true);
+            D.StartDialogue(lines,speaker);
+            Destroy(gameObject,5f);
+        }
     }
 
     public void Meiosis() //Yes, Biology is Fun :D
     {
+        string[] lines = {"Haha you really thought you would win soo easy! ofcourse not,lets see you deal wi,th 2 of me","FUUUUCCC-"};
+        string[] speaker = {"Evil robot","YOU"};
+        D.gameObject.SetActive(true);
+        D.StartDialogue(lines,speaker);
+        
         _daugherOne.SetActive(true);
         _daugherTwo.SetActive(true);
         bossHealthBar.SetActive(false);

@@ -2704,6 +2704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   gameOverScreen: {fileID: 1602288092}
   levelCompleteScreen: {fileID: 846934290}
+  isBoss: 0
   secondCam: {fileID: 1712404833}
   scoreText: {fileID: 274086882}
   _score: 0
