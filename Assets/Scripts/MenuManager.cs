@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
         if (PlayerPrefs.HasKey("level"))
         {
             Debug.Log("You are an old player");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("LevelManager");
         }
         else
         {

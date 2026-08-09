@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverScreen;
     public GameObject levelCompleteScreen;
+    public GameObject gameCompleteScreen = null;
     bool gameCompleted = false;
     public bool isBoss = false;
 
@@ -57,14 +58,35 @@ public class GameManager : MonoBehaviour
 
     public void GameComplete()
     {
-        levelCompleteScreen.SetActive(true);
-        secondCam.SetActive(true);
-        gameCompleted = true;
-        if (!gameCompleted)
+        if (!isBoss)
         {
-            Destroy(FindAnyObjectByType<playerMovement>().gameObject);
+            levelCompleteScreen.SetActive(true);
+            secondCam.SetActive(true);
+            gameCompleted = true;
+            if (!gameCompleted)
+            {
+                Destroy(FindAnyObjectByType<playerMovement>().gameObject);
+            }
+            Cursor.lockState = CursorLockMode.None;
+            //This is actual code and will be done after finalising score mechanics
+            //scoreText.text = "Score : " + _score.ToString();
+            scoreText.text = "Score : 00";
         }
+        else
+        {
+            gameCompleteScreen.SetActive(true);
+            secondCam.SetActive(true);
+            gameCompleted = true;
+            if (!gameCompleted)
+            {
+                Destroy(FindAnyObjectByType<playerMovement>().gameObject);
+            }
+            Cursor.lockState = CursorLockMode.None;
+        }
+<<<<<<< Updated upstream
         Cursor.lockState = CursorLockMode.None;
+=======
+>>>>>>> Stashed changes
     }
 
     public void Restart()
@@ -74,13 +96,13 @@ public class GameManager : MonoBehaviour
     
     public void NextLvl()
     {
-        if (PlayerPrefs.HasKey("level"))
+        if (PlayerPrefs.GetInt("level") > 0)
         {
             int levelCompleted = PlayerPrefs.GetInt("level");
-            PlayerPrefs.SetInt("level", levelCompleted);
+            PlayerPrefs.SetInt("level", levelCompleted+1);
             Debug.Log("Level Completed and levels completed are " + levelCompleted);
         }
-        else
+        else if(PlayerPrefs.GetInt("level") <= 0)
         {
             PlayerPrefs.SetInt("level", 1);
         }
@@ -90,5 +112,10 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void GameCompleted()
+    {
+        SceneManager.LoadScene("LevelManager");
     }
 }
