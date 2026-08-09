@@ -22,6 +22,11 @@ public class PlayerHealth : MonoBehaviour
         {
             gameManager.GameOver();
         }
+        else
+        {
+            playerHP.SetHealth(health);
+            healthText.text = health.ToString();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -29,5 +34,10 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         playerHP.SetHealth(health);
         healthText.text = health.ToString();
+    }
+
+    public void Heal(int amt)
+    {
+        health = health + amt;
     }
 }

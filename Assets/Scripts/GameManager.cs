@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject levelCompleteScreen;
     bool gameCompleted = false;
+    public bool isBoss = false;
 
     public GameObject secondCam;
     public Text scoreText;
@@ -21,12 +22,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindAnyObjectByType<Enemy>() == null)
+        if (FindAnyObjectByType<Enemy>() == null && !isBoss)
         {
             GameComplete();
             gameCompleted = true;
         }
-        else
+        else if(!isBoss && FindAnyObjectByType<Enemy>() != null)
+        {
+            gameCompleted = false;
+        }
+
+        if (isBoss && FindAnyObjectByType<Boss>() == null && FindAnyObjectByType<Enemy>() == null)
+        {
+            gameCompleted = true;
+            GameComplete();
+        }
+        else if (isBoss && FindAnyObjectByType<Boss>() != null || FindAnyObjectByType<Enemy>() != null)
         {
             gameCompleted = false;
         }
