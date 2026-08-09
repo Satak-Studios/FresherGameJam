@@ -6268,8 +6268,8 @@ Transform:
   m_GameObject: {fileID: 1178246761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.9, y: 22, z: 72.35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 74.9, y: 22, z: 69.44}
+  m_LocalScale: {x: 1, y: 1, z: 5.47}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1878384158}
@@ -10817,7 +10817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::dialogueTrigger
   lines:
   - Watch out, this enemy on dying may randomly respawn
-  - WTF? that can just happen randomly?
+  - WHAT? that can just happen randomly?
   - yah it can,for any enemy
   speakers:
   - Anthony
@@ -12697,7 +12697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   lines:
-  - uhh my head hurts where the frick am I?
+  - uhh my head hurts where the am I?
   - Hello hero, you are here to save our people from robots!
   - Who said that?? where is that sound coming from?
   - that does not matter,all you need to know is that you have been choosen to save
@@ -14894,7 +14894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::dialogueTrigger
   lines:
-  - Wait wtf where are the thick bullets coming from
+  - Wait, where are the thick bullets coming from
   - the enemeies randomly have a chance on their bullets being way more thick
   - Great, just Great....
   speakers:
