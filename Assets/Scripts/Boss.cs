@@ -1,10 +1,8 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Boss : MonoBehaviour
 {
     public NavMeshAgent agent;
 
@@ -16,10 +14,13 @@ public class Enemy : MonoBehaviour
     public float respawn_prob = 0.2f;
     public ParticleSystem respawn_particle;
 
+    //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
+
+    //Attacking
     public float timeBetweenAttacks;
     public float attack_offsets = 1f;
     bool alreadyAttacked;
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     public Transform Shooter;
     public AudioClip hurt_sound;
-
+    //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
@@ -40,10 +41,20 @@ public class Enemy : MonoBehaviour
     public Slider healthBar;
     private bool hasRespawned = false;
 
+    //Daughter offspring
+    public GameObject _daugherOne;
+    public GameObject _daugherTwo;
+
+    //Thy Boss Hath Arrived
+    public GameObject _boss;
+    public GameObject bossHealthBar;
+    public ParticleSystem explosionpParticle;
+
     void Start()
     {
         health = health_max;
         healthBar.maxValue = health_max;
+        explosionpParticle.Stop();
     }
     private void FixedUpdate()
     {
@@ -86,26 +97,26 @@ public class Enemy : MonoBehaviour
     }
 
     private void AttackPlayer()
-    { 
+    {
         agent.SetDestination(transform.position);
 
         //Vector3 aim = new Vector3(player.position.x,transform.position.y,player.position.z);
         transform.LookAt(player.position);
-        transform.rotation *= Quaternion.Euler(0,offset,0);
+        transform.rotation *= Quaternion.Euler(0, offset, 0);
 
         if (!alreadyAttacked)
         {
-            GameObject bullet = Instantiate(projectile, Shooter.position,transform.rotation);
+            GameObject bullet = Instantiate(projectile, Shooter.position, transform.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            if(UnityEngine.Random.Range(0f,1f) < thickify_probability)
+            if (UnityEngine.Random.Range(0f, 1f) < thickify_probability)
             {
-                bullet.transform.localScale += new Vector3(thicknessFactor,0F,0f);
+                bullet.transform.localScale += new Vector3(thicknessFactor, 0F, 0f);
             }
 
-            rb.AddForce(transform.forward * projectile_speedX + transform.right*projectile_speedY, ForceMode.Impulse);
+            rb.AddForce(transform.forward * projectile_speedX + transform.right * projectile_speedY, ForceMode.Impulse);
 
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks + UnityEngine.Random.Range(0,attack_offsets));
+            Invoke(nameof(ResetAttack), timeBetweenAttacks + UnityEngine.Random.Range(0, attack_offsets));
         }
     }
 
@@ -116,26 +127,25 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        SFXManager.instance.PlaySFXClip(hurt_sound,transform,1f);
-        if (health <= 0) {
-            //Invoke(nameof(DestroyEnemy), 0.5f);
-            //Making this faster So they die quicker :D
+        SFXManager.instance.PlaySFXClip(hurt_sound, transform, 1f);
+        if (health <= 0)
+        {
+            explosionpParticle.Play();
+            FindAnyObjectByType<ScreenShake>().StartShake(0.6f, 0.5f);
             Invoke(nameof(DestroyEnemy), 0.2f);
         }
     }
     private void DestroyEnemy()
     {
-        //Debug.Log(hasRespawned);
-        if((UnityEngine.Random.Range(0f,1f) > respawn_prob) || hasRespawned)
-        {
-            Destroy(gameObject);
-        }
-        else{
-            health = health_max/2;
-            health_max = health;
-            respawn_particle.Play();
-            hasRespawned = true;
-        }
+        Meiosis();
+    }
+
+    public void Meiosis() //Yes, Biology is Fun :D
+    {
+        _daugherOne.SetActive(true);
+        _daugherTwo.SetActive(true);
+        bossHealthBar.SetActive(false);
+        _boss.SetActive(false);
     }
 
     public void Heal(float healAmount)

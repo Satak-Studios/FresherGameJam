@@ -7427,7 +7427,7 @@ MonoBehaviour:
   respawn_particle: {fileID: 676840537341039686}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
-  timeBetweenAttacks: 1.5
+  timeBetweenAttacks: 1
   attack_offsets: 1
   projectile: {fileID: 3302379682200405297, guid: 23ee4c26fd72bb64ca89ec37626abf1b, type: 3}
   projectile_speedX: 30

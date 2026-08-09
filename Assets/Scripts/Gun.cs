@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
 
     public Camera fpsCamera;
     public ParticleSystem ps;
+
     // Update is called once per frame
     void Start()
     {
@@ -26,11 +27,17 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward,out hit))
         {
+            Boss _boss = hit.transform.GetComponent<Boss>();
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             Barrel barrel = hit.transform.GetComponent<Barrel>();
             if(enemy != null)
             {
                 enemy.TakeDamage(damage);
+            }
+            
+            if(_boss != null)
+            {
+                _boss.TakeDamage(damage);
             }
             
             if (barrel != null)
