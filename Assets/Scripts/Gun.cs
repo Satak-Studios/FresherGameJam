@@ -28,6 +28,7 @@ public class Gun : MonoBehaviour
         if(Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward,out hit))
         {
             Boss _boss = hit.transform.GetComponent<Boss>();
+            MiniBoss _mBoss = hit.transform.GetComponent<MiniBoss>();
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             Barrel barrel = hit.transform.GetComponent<Barrel>();
             if(enemy != null)
@@ -39,7 +40,12 @@ public class Gun : MonoBehaviour
             {
                 _boss.TakeDamage(damage);
             }
-            
+
+            if (_mBoss != null)
+            {
+                _mBoss.TakeDamage(damage);
+            }
+
             if (barrel != null)
             {
                 barrel.TakeDamage(barrelDamage);
