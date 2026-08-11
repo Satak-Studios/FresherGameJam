@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelCompleteScreen;
     public GameObject gameCompleteScreen = null;
     bool gameCompleted = false;
-    public bool isBoss = false;
+    public bool isBoss;
 
     public GameObject secondCam;
 
@@ -34,12 +34,13 @@ public class GameManager : MonoBehaviour
             gameCompleted = false;
         }
 
-        if (isBoss && FindAnyObjectByType<MiniBoss>() == null && FindAnyObjectByType<Enemy>() == null && theEnd)
+        if (isBoss && FindAnyObjectByType<Boss>() == null && FindAnyObjectByType<Enemy>() == null && FindAnyObjectByType<MiniBoss>() == null && theEnd)
         {
+            Debug.Log("hey!");
             gameCompleted = true;
-            GameOver();
+            GameComplete();
         }
-        else if (isBoss && FindAnyObjectByType<Boss>() != null || FindAnyObjectByType<Enemy>() != null)
+        else if (isBoss && (FindAnyObjectByType<MiniBoss>() != null || FindAnyObjectByType<Enemy>() != null))
         {
             gameCompleted = false;
         }
@@ -81,8 +82,6 @@ public class GameManager : MonoBehaviour
             }
             Cursor.lockState = CursorLockMode.None;
         }
-
-        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Restart()

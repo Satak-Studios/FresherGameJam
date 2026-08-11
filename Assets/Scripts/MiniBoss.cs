@@ -48,8 +48,6 @@ public class MiniBoss : MonoBehaviour
     public GameObject _boss;
     public ParticleSystem explosionpParticle;
 
-    public dialogue D;
-
     void Start()
     {
         health = health_max;
@@ -139,8 +137,6 @@ public class MiniBoss : MonoBehaviour
     private void DestroyEnemy()
     {
         Debug.Log("hello1");
-        D.gameObject.SetActive(true);
-
         healthBar.gameObject.SetActive(false);
         _boss.SetActive(false);
         int totalMinis = FindObjectsByType<MiniBoss>().Length;

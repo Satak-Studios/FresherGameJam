@@ -47,6 +47,7 @@ public class Boss : MonoBehaviour
     //Thy Boss Hath Arrived
     public GameObject _boss;
     public ParticleSystem explosionpParticle;
+    bool boss_dead = false;
 
     public dialogue D;
 
@@ -129,11 +130,12 @@ public class Boss : MonoBehaviour
     {
         health -= damage;
         SFXManager.instance.PlaySFXClip(hurt_sound, transform, 1f);
-        if (health <= 0)
+        if (health <= 0 && !boss_dead)
         {
             explosionpParticle.Play();
             FindAnyObjectByType<ScreenShake>().StartShake(0.6f, 0.5f);
-            Invoke(nameof(DestroyEnemy), 0.2f);
+
+            DestroyEnemy();
         }
     }
     private void DestroyEnemy()
