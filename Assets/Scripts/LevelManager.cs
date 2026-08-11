@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
         {
             toolTip.gameObject.SetActive(true);
         }
-        else if (levelsCompleted >= 3)
+        else if (levelsCompleted == 4)
         {
             toolTip.gameObject.SetActive(true);
             toolTip.text = "Game Completed!";

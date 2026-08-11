@@ -2625,6 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   gameOverScreen: {fileID: 1602288092}
   levelCompleteScreen: {fileID: 846934290}
+  gameCompleteScreen: {fileID: 0}
   isBoss: 0
   secondCam: {fileID: 1712404833}
   isFirstWave: 1
@@ -12235,11 +12236,11 @@ MonoBehaviour:
       - m_Target: {fileID: 603016966}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: NextLvl
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

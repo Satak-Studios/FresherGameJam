@@ -7533,7 +7533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4370918849784014563, guid: 664c0328ba9858941babea63f8e72b75, type: 3}
       propertyPath: health
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4370918849784014563, guid: 664c0328ba9858941babea63f8e72b75, type: 3}
       propertyPath: playerHP

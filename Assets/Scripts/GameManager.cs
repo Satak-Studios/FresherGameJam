@@ -89,24 +89,32 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
-    public void NextLvl()
+    public void NextLvl(int level)
     {
         if (PlayerPrefs.GetInt("level") > 0)
         {
             int levelCompleted = PlayerPrefs.GetInt("level");
-            PlayerPrefs.SetInt("level", levelCompleted+1);
+            PlayerPrefs.SetInt("level", level);
             Debug.Log("Level Completed and levels completed are " + levelCompleted);
         }
         else if(PlayerPrefs.GetInt("level") <= 0)
         {
-            PlayerPrefs.SetInt("level", 1);
+            PlayerPrefs.SetInt("level", level);
         }
-        SceneManager.LoadScene("level "+ (SceneManager.GetActiveScene().buildIndex+1));
+        SceneManager.LoadScene("LevelManager");
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        if (isBoss)
+        {
+            PlayerPrefs.SetInt("level", 4);
+            SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     public void GameCompleted()
