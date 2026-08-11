@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     { 
         for (int i = 1; i < levelSprits.Length; i++)
         {
-            if (i < levelsCompleted)
+            if (i < levelsCompleted+1)
             {
                 levelSprits[i].interactable = true;
             }

@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
             if (isTutu)
             {
                 tutuScreen.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
